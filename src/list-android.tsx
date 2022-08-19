@@ -12,9 +12,9 @@ export default function Command() {
   const preferences: PreferenceValues = getPreferenceValues<PreferenceValues>();
   const projectsDirectory = preferences.ANDROID_DIRECTORY;
 
-  delay(40000)
 
-  getDirectories(projectsDirectory, (files: string[]) => {
+  getDirectories(projectsDirectory, async (files: string[]) => {
+    await delay(2000)//fake loading
     setItems(files)
     setLoading(false)
 
@@ -34,12 +34,12 @@ export default function Command() {
 }
 
 
-const getDirectories = (
+async function getDirectories(
   source: PathLike,
   onSuccess: (directories: string[]) => string[],
   onError: (err: NodeJS.ErrnoException) => void
-) =>
-  readdir(source, { withFileTypes: true }, (err, files) => {
+) {
+  return readdir(source, { withFileTypes: true }, (err, files) => {
     if (err) {
       onError(err);
     } else {
@@ -47,6 +47,7 @@ const getDirectories = (
       onSuccess(directories);
     }
   });
+}
 
 
 function delay(ms: number) {
