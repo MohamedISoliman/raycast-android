@@ -45,7 +45,6 @@ export default function Command() {
 
 function loadDirectories(projectsDirectory: any, setItems, setLoading) {
   getDirectories(projectsDirectory, async (files: string[]) => {
-    await delay(2000); //fake loading
 
     setItems(files);
     // files.forEach(element => {
