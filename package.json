@@ -29,6 +29,17 @@
     "prettier": "^2.5.1",
     "typescript": "^4.4.3"
   },
+  "preferences": [
+    {
+      "title": "Android Projects Directory",
+      "label": "projectsDirectory",
+      "name": "ANDROID_DIRECTORY",
+      "description": "Locate your Android Projects",
+      "type": "textfield",
+      "required": true,
+      "default": ""
+    }
+  ],
   "scripts": {
     "build": "ray build -e dist",
     "dev": "ray develop",
