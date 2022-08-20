@@ -1,12 +1,7 @@
-import { ActionPanel, Detail, List, Action, PreferenceValues, showToast, Toast, popToRoot, Icon } from "@raycast/api";
-import { getPreferenceValues } from "@raycast/api";
-import { useState, useEffect } from "react";
-import { PathLike, readdir } from "fs";
-import { getApplications } from "@raycast/api";
+import { Action, ActionPanel, getPreferenceValues, Icon, List, popToRoot, PreferenceValues, showToast, Toast } from "@raycast/api";
+import { useEffect, useState } from "react";
 const { exec } = require('child_process');
-import { environment } from "@raycast/api";
 
-import fs from 'fs';
 
 
 export default function Command() {
