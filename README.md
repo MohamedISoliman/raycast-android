@@ -3,7 +3,7 @@
 ## List Android Projects
 
 - Make sure to add your android projects directory.
-- make sure Android studio and Raycast has access permission to this directory.
+- Make sure Android studio and Raycast has access permission to this directory.
 
 ## List Android Emulators
 
