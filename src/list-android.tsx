@@ -25,7 +25,7 @@ export default function Command() {
         const items = value.filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name)
 
         setItems(items)
-        showToast(Toast.Style.Success, "Nice 👌🏼")
+        showToast(Toast.Style.Success, "Loaded!")
 
       }).catch(err => {
 
@@ -42,16 +42,13 @@ export default function Command() {
 
   }, [])
 
-
-  const icon1 = "https://img.icons8.com/fluency/344/android-studio--v2.png"
-
   return (
     <List isLoading={loading}>
       {
         items?.map((project: string, index) => (
 
           <List.Item
-            icon={{ source: icon1 }}//TODO: load app icon
+            icon={{ source: "android-os.png" }}//TODO: load app icon
             key={index}
             title={project}
             accessories={[

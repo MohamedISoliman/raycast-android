@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "list-android-projects",
-  "title": "List Android Projects",
-  "description": "List Android Projects in a glance",
+  "name": "android-studio",
+  "title": "Android studio",
+  "description": "Useful Android commands",
   "icon": "command-icon.png",
   "author": "mibrahimdev",
   "categories": [
@@ -13,8 +13,17 @@
     {
       "name": "list-android",
       "title": "List Android Projects",
-      "subtitle": "List Android Project",
-      "description": "",
+      "subtitle": "Android",
+      "description": "show android projects in directory",
+      "icon": "list-android.png",
+      "mode": "view"
+    },
+    {
+      "name": "list-emulators",
+      "title": "List Android emulators",
+      "subtitle": "Android",
+      "description": "show android emulators",
+      "icon": "list-android.png",
       "mode": "view"
     }
   ],
@@ -34,7 +43,7 @@
       "title": "Android Projects Directory",
       "label": "projectsDirectory",
       "name": "ANDROID_DIRECTORY",
-      "description": "copy path of your Android Projects, without /",
+      "description": "copy path of your Android Projects, without '/'",
       "type": "textfield",
       "required": true,
       "default": ""
