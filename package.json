@@ -13,7 +13,7 @@
     {
       "name": "list-android",
       "title": "List Android Projects",
-      "subtitle": "Show Android Project",
+      "subtitle": "List Android Project",
       "description": "",
       "mode": "view"
     }
@@ -34,7 +34,7 @@
       "title": "Android Projects Directory",
       "label": "projectsDirectory",
       "name": "ANDROID_DIRECTORY",
-      "description": "Locate your Android Projects",
+      "description": "copy path of your Android Projects, without /",
       "type": "textfield",
       "required": true,
       "default": ""

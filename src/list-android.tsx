@@ -2,9 +2,9 @@ import { ActionPanel, Detail, List, Action, PreferenceValues, showToast, Toast, 
 import { getPreferenceValues } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { PathLike, readdir } from "fs";
-import { homedir } from "os";
 import { getApplications } from "@raycast/api";
 const { exec } = require('child_process');
+import fs from 'fs';
 
 
 export default function Command() {
@@ -15,7 +15,33 @@ export default function Command() {
   const preferences: PreferenceValues = getPreferenceValues();
   const projectsDirectory = preferences.ANDROID_DIRECTORY;
 
-  loadDirectories(projectsDirectory, setItems, setLoading);
+  useEffect(() => {
+
+    async function listDir() {
+
+
+      await listDirectories(projectsDirectory).then(value => {
+
+        const items = value.filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name)
+
+        setItems(items)
+        showToast(Toast.Style.Success, "Nice 👌🏼")
+
+      }).catch(err => {
+
+        showToast(Toast.Style.Failure, "Something wrong happend!", err)
+        console.error('Error occured while reading directory!', err)
+
+      }).finally(() => {
+
+        setLoading(false)
+      })
+
+    }
+    listDir()
+
+  }, [])
+
 
   const icon1 = "https://img.icons8.com/fluency/344/android-studio--v2.png"
 
@@ -42,26 +68,10 @@ export default function Command() {
     </List>);
 }
 
-
-function loadDirectories(projectsDirectory: any, setItems, setLoading) {
-  getDirectories(projectsDirectory, async (files: string[]) => {
-
-    setItems(files);
-    // files.forEach(element => {
-    //   console.log(projectsDirectory + '/' + element)
-    // });
-    setLoading(false);
-    showToast(Toast.Style.Success, "Loaded!");
-
-  }, function (err: NodeJS.ErrnoException) {
-    showToast(Toast.Style.Failure, "Something wrong happed!", err.message);
-    setLoading(false);
-  });
-}
-
 function openProject(projectsDirectory: any, project: string): void {
   return exec(`open -na Android\\ Studio.app --args ${projectsDirectory}/${project}`,
-    (err, stdout, stderr) => {
+    (err: any, stdout: any, stderr: any) => {
+      console.log(`opening ${projectsDirectory}/${project}`)
       console.log(err);
       console.log(stdout);
       console.log(stderr);
@@ -69,21 +79,11 @@ function openProject(projectsDirectory: any, project: string): void {
     });
 }
 
-async function getDirectories(
-  source: PathLike,
-  onSuccess: (directories: string[]) => string[],
-  onError: (err: NodeJS.ErrnoException) => void
-) {
-  return readdir(source, { withFileTypes: true }, (err, files) => {
-    if (err) {
-      onError(err);
-    } else {
-      const directories = files.filter((dirent) => dirent.isDirectory()).map((dirent) => dirent.name);
-      onSuccess(directories);
-    }
-  });
-}
 
+
+async function listDirectories(folder: string) {
+  return fs.promises.readdir(folder, { withFileTypes: true })
+}
 
 export async function isAndroidStudioInstalled() {
   return (await getApplications()).find((app) => {
@@ -92,7 +92,6 @@ export async function isAndroidStudioInstalled() {
   })
 }
 
-
-function delay(ms: number) {
+function delay1(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
